@@ -13,6 +13,13 @@
             <%= authError %>
         </p>
     <% } %>
+    <% if(validationErrors !== '') { %>
+        <% for(let error of validationErrors) { %>
+            <p class="alert alert-danger">
+                <%= error.msg %>
+            </p>
+        <% } %>
+    <% } %>
     <div>
         Don't have an account? <a href="/signup">Sign Up</a>
     </div>

@@ -26,19 +26,30 @@ exports.postSignup = (req, res, next) => {
     }
 }
 exports.getLogin = (req, res, next) => {
-    res.render('login', { title: 'Login', authError: req.flash('authError') });
+    res.render('login', { 
+        title: 'Login', 
+        authError: req.flash('authError'),
+        validationErrors: req.flash('validationErrors') 
+    });
 }
 
 exports.postLogin = (req, res, next) => {
-    authModel.login(req.body.email, req.body.password)
-    .then(userId => {
-        req.session.userId = userId;
-        res.redirect('/');
-    })
-    .catch(err => {
-        req.flash('authError', err);
+    if(validationResult(req).isEmpty()){
+        authModel.login(req.body.email, req.body.password)
+        .then(userId => {
+            req.session.userId = userId;
+            res.redirect('/');
+        })
+        .catch(err => {
+            req.flash('authError', err);
+            res.redirect('/login');
+        })
+    }
+    else{
+        const errors = validationResult(req).array();
+        req.flash('validationErrors', errors);
         res.redirect('/login');
-    })
+    }
 }
 
 exports.logout = (req, res, next) => {

@@ -22,7 +22,12 @@ router.post('/signup',
 
 router.get('/login', authController.getLogin);
 
-router.post('/login', bodyParser.urlencoded({extended: true}), authController.postLogin);
+router.post('/login',
+    bodyParser.urlencoded({extended: true}),
+    check('email').isEmail().withMessage('Valid email is required'),
+    check('password').isLength({min: 6}).withMessage('Password must be at least 6 characters long'),
+    authController.postLogin
+);
 
 router.all('/logout', authController.logout);
 
