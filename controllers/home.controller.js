@@ -5,7 +5,8 @@ exports.getHome = (req, res) =>{
         res.render('index', {
             title: 'Home Page',
             products: products,
-            isUser: req.session.userId
+            isUser: req.session.userId,
+            validationErrors: req.flash('validationErrors')
         });
     })
 }

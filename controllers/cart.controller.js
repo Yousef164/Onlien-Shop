@@ -20,6 +20,6 @@ exports.postCart = (req, res, next) => {
     }
     else {
         req.flash('validationErrors', validationResult(req).array())
-        res.redirect
+        res.redirect(req.body.redirectTo);
     }
 }

@@ -8,8 +8,10 @@ const flash = require('connect-flash');
 dotenv.config({path: './config.env'});
 
 const home = require('./routes/home.route');
+const cartRouter = require('./routes/cart.route');
 const authRouter = require('./routes/auth.route');
 const productRouter = require('./routes/product.route');
+
 
 const app = express();
 
@@ -37,7 +39,7 @@ app.use(flash());
 app.use('/', home);
 app.use('/', authRouter);
 app.use('/product', productRouter);
-app.use('/cart');
+app.use('/cart', cartRouter);
 
 
 

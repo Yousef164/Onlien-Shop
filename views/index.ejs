@@ -1,5 +1,10 @@
 <%- include('./parts/header') %>
 <%- include('./parts/navbar') %>
+<% if(validationErrors != '') { %>
+<p class="alert alert-danger">
+    <%= validationErrors.msg %>
+</p>
+<% } %>
 <% if(products.length === 0){ %>
     <div class="alert alert-danger">
         there is no products
@@ -21,6 +26,7 @@
                             <input type="hidden" name="name" value="<%= product.name %>">
                             <input type="hidden" name="price" value="<%= product.price %>">
                             <input type="hidden" name="productId" value="<%= product._id %>">
+                            <input type="hidden" name="redirectTo" value="/">
                             <input type="submit" value="Add to cart" class="btn btn-primary">
                         </form>
                     </div>
