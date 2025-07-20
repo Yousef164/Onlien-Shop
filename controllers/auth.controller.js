@@ -6,7 +6,8 @@ exports.getSignup = (req, res, next) => {
     res.render('signup', {
         title: 'Sign Up',
         authError: req.flash('authError'), 
-        validationErrors: req.flash("validationErrors")  
+        validationErrors: req.flash("validationErrors"),
+        isUser: req.session.userId 
     });  
 }
 
@@ -29,7 +30,8 @@ exports.getLogin = (req, res, next) => {
     res.render('login', { 
         title: 'Login', 
         authError: req.flash('authError'),
-        validationErrors: req.flash('validationErrors') 
+        validationErrors: req.flash('validationErrors'),
+        isUser: req.session.userId
     });
 }
 

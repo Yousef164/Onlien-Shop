@@ -37,6 +37,7 @@ app.use(flash());
 app.use('/', home);
 app.use('/', authRouter);
 app.use('/product', productRouter);
+app.use('/cart');
 
 
 
