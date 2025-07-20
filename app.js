@@ -31,6 +31,7 @@ const store = new SessionStore({
 
 app.use(session({
     secret: process.env.SESSION_SECRET || "this is secret cookie",
+    resave: false,
     saveUninitialized: false,
     store: store,
 }))

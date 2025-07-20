@@ -6,7 +6,7 @@ exports.getHome = (req, res) =>{
             title: 'Home Page',
             products: products,
             isUser: req.session.userId,
-            validationErrors: req.flash('validationErrors')
+            validationErrors: req.flash('validationErrors')[0]
         });
     })
 }

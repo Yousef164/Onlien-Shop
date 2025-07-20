@@ -14,7 +14,7 @@ const Product = mongoose.model('product', productSchema);
 
 
 exports.getAllProducts = () => {
-    return new Promise((resolve, reject)=>{
+    return new Promise((resolve, reject) => {
         mongoose.connect(DB_URL).then(() => {
             return Product.find({})
         })

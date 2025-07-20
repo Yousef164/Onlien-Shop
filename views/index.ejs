@@ -1,6 +1,6 @@
 <%- include('./parts/header') %>
 <%- include('./parts/navbar') %>
-<% if(validationErrors != '') { %>
+<% if(validationErrors) { %>
 <p class="alert alert-danger">
     <%= validationErrors.msg %>
 </p>
