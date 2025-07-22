@@ -22,7 +22,10 @@ exports.getAllProducts = () => {
             mongoose.disconnect();
             resolve(products);
         })
-        .catch(err => reject(err));
+        .catch(err => {
+            mongoose.disconnect();
+            reject(err)
+        });
     })
 }
 
@@ -38,7 +41,7 @@ exports.productDetils = (id)=> {
         })
         .catch(err => {
             mongoose.disconnect();
-            reject(err)
+            reject(err);
         });
     })
 }

@@ -43,8 +43,8 @@ exports.createNewUser = (username, email, password) => {
             mongoose.disconnect();
             reject(err);
         });
-    })
-}
+    });
+};
 
 
 exports.login = (email, password) => {
@@ -73,4 +73,4 @@ exports.login = (email, password) => {
             }
         })
     });
-}
+};

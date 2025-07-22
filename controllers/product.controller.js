@@ -4,7 +4,7 @@ exports.getProduct = (req, res, next)=> {
 
     let id = req.params.id;
     productsModel.productDetils(id).then((product) => {
-        res.render('../views/product.page.ejs', {
+        res.render('product.page.ejs', {
             product: product,
             title: 'product page',
             isUser: req.session.isAuth

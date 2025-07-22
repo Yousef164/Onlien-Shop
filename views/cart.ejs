@@ -1,0 +1,49 @@
+<%- include('parts/header') %>
+<%- include('parts/navbar') %>
+<div class="container">
+    <% if(!items) { %>
+        <p class="alert alert-danger">There is no items</p>
+    <% } else { %>
+        
+        <table>
+            <thead>
+                <td style="border: 1px solid black; padding: 8px;">no</td>
+                <td style="border: 1px solid black; padding: 8px;">Product name</td>
+                <td style="border: 1px solid black; padding: 8px;">Price</td>
+                <td style="border: 1px solid black; padding: 8px;">Amount</td>
+                <td style="border: 1px solid black; padding: 8px;">Total</td>
+                <td style="border: 1px solid black; padding: 8px;"></td>
+            </thead>
+            <tbody>
+                <% for (let i = 0; i < items.length; i++) { %>
+                    <tr>
+                        <td style="border: 1px solid black; padding: 8px;"><%= i + 1 %></td>
+                        <td style="border: 1px solid black; padding: 8px;"><%= items[i].name %></td>
+                        <td style="border: 1px solid black; padding: 8px;"><%= items[i].price %> $ </td>
+                        <form method="post">
+                            <td style="border: 1px solid black; padding: 8px;"> <input type="text" name="amount" class="form-control" value="<%= items[i].amount %>"></td>
+                            <td style="border: 1px solid black; padding: 8px;"> <%= items[i].price * items[i].amount %> $ </td>
+                            <td style="border: 1px solid black; padding: 8px;">
+                                <input type="hidden" name="cartId" value="<%= items[i]._id %>">
+                                <input type="submit" class="btn btn-success" value="Save" formaction="/cart/save">
+                                <input type="submit"  class="btn btn-success" value="Order" formaction="order">
+                                <input type="submit" class="btn btn-danger" value="Delete" formaction="/cart/delete">
+                            </td>
+                        </form>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    <form method="post">
+        <input type="submit"  class="btn btn-success" value="Order All" formaction="/orderAll">
+        <input type="submit" class="btn btn-danger" value="Delete All" formaction="/cart/deleteAll">
+    </form>
+    <% } %>
+    <% if(validationErrors) { %>
+        <% for(let err of validationErrors) { %>
+            <p class="alert alert-danger"><%= err.msg %></p>
+        <% } %>
+    <% } %>
+</div>
+
+<%- include('parts/footer') %>
