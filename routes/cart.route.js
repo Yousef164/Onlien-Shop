@@ -43,16 +43,6 @@ router.post('/deleteAll',
     cartController.postDeleteAll
 )
 
-router.post('/order',
-    authGuard.isAuth,
-    bodyParser.urlencoded({extended: true}),
-    cartController.postOrder
-);
-
-router.post('/orderAll', 
-    authGuard.isAuth,
-    cartController.postOrderAll
-);
 
 router.get('/address', authGuard.isAuth, cartController.getAddress);
 

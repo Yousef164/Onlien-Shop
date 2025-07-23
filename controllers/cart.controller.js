@@ -78,25 +78,6 @@ exports.postOrder = (req, res, next) => {
     }
 };
 
-exports.postOrderAll = (req, res, next) => {
-    if(validationResult(req).isEmpty()) {
-        req.session.productId = undefined;
-        res.redirect('/cart/address');
-    }
-    else {
-        req.flash("validationErrors", validationResult(req).array());
-        res.redirect('/cart');
-    }
-}
-
-exports.getAddress = (req, res, next) => {
-    res.render('address', {
-        title: "Address Page",
-        isUser: true,
-        addressError: req.flash('addressError')[0]
-    });
-};
-
 exports.postAddress = (req, res, next) => {
     if(validationResult(req).isEmpty()) {
         req.session.address = req.body.address;
