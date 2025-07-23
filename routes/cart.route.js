@@ -43,8 +43,26 @@ router.post('/deleteAll',
     cartController.postDeleteAll
 )
 
-router.get('/order', authGuard.isAuth, cartController.cartOrders);
+router.post('/order',
+    authGuard.isAuth,
+    bodyParser.urlencoded({extended: true}),
+    cartController.postOrder
+);
 
+router.post('/orderAll', 
+    authGuard.isAuth,
+    cartController.postOrderAll
+);
 
+router.get('/address', authGuard.isAuth, cartController.getAddress);
+
+router.post('/address',
+    authGuard.isAuth,
+    bodyParser.urlencoded({extended: true}),
+    check('address')
+    .notEmpty()
+    .withMessage('Address is required'),
+    cartController.postAddress
+);
 
 module.exports = router;

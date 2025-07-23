@@ -10,6 +10,8 @@ const Schema = mongoose.Schema({
     amount: Number,
     userId: String,
     productId: String,
+    status: String,
+    address: String,
     timestamp: Number
 })
 

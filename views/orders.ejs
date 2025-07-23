@@ -1,0 +1,42 @@
+<%- include('parts/header') %>
+<%- include('parts/navbar') %>
+<div class="container">
+    <% if(!items) { %>
+        <p class="alert alert-danger">There is no items</p>
+    <% } else { %>
+        
+        <table>
+            <thead>
+                <td style="border: 1px solid black; padding: 8px;">Product name</td>
+                <td style="border: 1px solid black; padding: 8px;">Amount</td>
+                <td style="border: 1px solid black; padding: 8px;">Cost</td>
+                <td style="border: 1px solid black; padding: 8px;">Address</td>
+                <td style="border: 1px solid black; padding: 8px;">status</td>
+                <td style="border: 1px solid black; padding: 8px;">Time</td>
+            </thead>
+            <tbody>
+                <% let cost = 0; %>
+                <% for (let i = 0; i < items.length; i++) { %>
+                    <tr>
+                        <td style="border: 1px solid black; padding: 8px;"><%= items[i].name %></td>
+                        <% cost += items.price %>
+                        <form method="post">
+                            <td style="border: 1px solid black; padding: 8px;"> <input type="text" name="amount" class="form-control" value="<%= items[i].amount %>"></td>
+                        </form>
+                    </tr>
+                <% } %>
+                <td style="border: 1px solid black; padding: 8px;"> <%= cost %> $ </td>
+                <td style="border: 1px solid black; padding: 8px;"> <%= address %> $ </td>
+                <td style="border: 1px solid black; padding: 8px;"> <%= status %> $ </td>
+                <td style="border: 1px solid black; padding: 8px;"> <%= time %> $ </td>
+            </tbody>
+        </table>
+    <% } %>
+    <% if(validationErrors) { %>
+        <% for(let err of validationErrors) { %>
+            <p class="alert alert-danger"><%= err.msg %></p>
+        <% } %>
+    <% } %>
+</div>
+
+<%- include('parts/footer') %>

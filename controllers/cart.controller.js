@@ -23,6 +23,8 @@ exports.postCart = (req, res, next) => {
             amount: req.body.amount,
             productId: req.body.productId,
             userId: req.session.userId,
+            status: "false",
+            address: "",
             timestamp: Date.now()
         })
         .then(()=> {
@@ -49,7 +51,7 @@ exports.postSave = (req, res, next) => {
     }
     else {
         req.flash("validationErrors", validationResult(req).array());
-        res.redirect('/cart')
+        res.redirect('/cart');
     }
 };
 
@@ -65,6 +67,43 @@ exports.postDeleteAll = (req, res, next) => {
     .catch(err => console.log(err));
 };
 
-exports.cartOrder = (req, res, next) => {
-       
+exports.postOrder = (req, res, next) => {
+    if(validationResult(req).isEmpty()) {
+        req.session.productId = req.body.cartId;
+        res.redirect('/cart/address');   
+    }
+    else {
+        req.flash("validationErrors", validationResult(req).array());
+        res.redirect('/cart');
+    }
+};
+
+exports.postOrderAll = (req, res, next) => {
+    if(validationResult(req).isEmpty()) {
+        req.session.productId = undefined;
+        res.redirect('/cart/address');
+    }
+    else {
+        req.flash("validationErrors", validationResult(req).array());
+        res.redirect('/cart');
+    }
 }
+
+exports.getAddress = (req, res, next) => {
+    res.render('address', {
+        title: "Address Page",
+        isUser: true,
+        addressError: req.flash('addressError')[0]
+    });
+};
+
+exports.postAddress = (req, res, next) => {
+    if(validationResult(req).isEmpty()) {
+        req.session.address = req.body.address;
+        res.redirect('/orders')
+    }
+    else{
+        req.flash("addressError", validationResult(req).array())
+        res.redirect('/cart/address')
+    }
+};
