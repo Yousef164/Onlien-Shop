@@ -2,7 +2,7 @@
 <%- include('parts/navbar') %>
 <div class="container text-center">
     <form action="/cart/address" method="post">
-        <input type="text" name="address" class="form-control" placeholder="Enter Address">
+        <input type="text" name="userAddress" class="form-control" placeholder="Enter Address">
         <input type="submit" value="Enter" class="btn btn-success">
     </form>
     <% if(addressError) { %>

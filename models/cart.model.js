@@ -77,6 +77,24 @@ exports.editItem = (id, newData) => {
     });
 };
 
+exports.editAllItem = (userId, address, newData) =>  {
+    return new Promise((resolve, reject) => {
+        mongoose.connect(DB_URL)
+        .then(() => {
+            return CartItem.updateMany({userId: userId, address: address}, newData)
+        })
+        .then(item => {
+            mongoose.disconnect();
+            resolve(item);
+        })
+        .catch(err => {
+            mongoose.disconnect();
+            reject(err);
+        });
+    });
+};
+
+
 exports.deleteItem = id => {
     return new Promise((resolve, reject) => {
         mongoose.connect(DB_URL)
@@ -98,9 +116,9 @@ exports.deleteAllItem = () => {
     return new Promise((resolve, reject) => {
         mongoose.connect(DB_URL)
         .then(() => {
-            return CartItem.deleteMany({})
+            CartItem.deleteMany({})
         })
-        .then( ()=> {
+        .then(()=> {
             mongoose.disconnect();
             resolve();
         })

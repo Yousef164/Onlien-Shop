@@ -21,21 +21,23 @@
                         <td style="border: 1px solid black; padding: 8px;"><%= items[i].name %></td>
                         <% cost += items.price %>
                         <form method="post">
+                            <input type="hidden" name="status" value="<%= items[i].status %>">
+                            <input type="hidden" name="productId" value="<%= items[i]._id %>">
                             <td style="border: 1px solid black; padding: 8px;"> <input type="text" name="amount" class="form-control" value="<%= items[i].amount %>"></td>
                         </form>
+                        <td style="border: 1px solid black; padding: 8px;"> <%= items[i].amount * items[i].price %> $ </td>
+                        <td style="border: 1px solid black; padding: 8px;"> <%= items[i].address %></td>
+                        <td style="border: 1px solid black; padding: 8px;"> <%= items[i].status %></td>
+                        <td style="border: 1px solid black; padding: 8px;"> <%= time.days %>:<%= time.hours %>:<%= time.minutes %> </td>
                     </tr>
-                                    <td style="border: 1px solid black; padding: 8px;"> <%= cost %> $ </td>
-                <td style="border: 1px solid black; padding: 8px;"> <%= items[i].address %> $ </td>
-                <td style="border: 1px solid black; padding: 8px;"> <%= items[i].status %> $ </td>
-                <td style="border: 1px solid black; padding: 8px;"> <%= time %> $ </td>
                 <% } %>
             </tbody>
         </table>
-    <% } %>
-    <% if(validationErrors) { %>
-        <% for(let err of validationErrors) { %>
-            <p class="alert alert-danger"><%= err.msg %></p>
-        <% } %>
+        <% if(ordersError) { %>
+            <% for(let err of ordersError) { %>
+                <p class="alert alert-danger"><%= err.msg %></p>    
+            <% } %>
+        <% } %>    
     <% } %>
 </div>
 

@@ -41,15 +41,18 @@ router.post('/deleteAll',
     authGuard.isAuth,
     bodyParser.urlencoded({extended: true}),
     cartController.postDeleteAll
-)
+);
 
+router.post('/order', authGuard.isAuth, bodyParser.urlencoded({extended: true}), cartController.postOrder);
+
+router.post('/orderAll', authGuard.isAuth, cartController.postOrderAll);
 
 router.get('/address', authGuard.isAuth, cartController.getAddress);
 
 router.post('/address',
     authGuard.isAuth,
     bodyParser.urlencoded({extended: true}),
-    check('address')
+    check('userAddress')
     .notEmpty()
     .withMessage('Address is required'),
     cartController.postAddress

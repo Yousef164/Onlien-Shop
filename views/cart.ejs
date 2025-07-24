@@ -26,7 +26,8 @@
                             <td style="border: 1px solid black; padding: 8px;">
                                 <input type="hidden" name="cartId" value="<%= items[i]._id %>">
                                 <input type="submit" class="btn btn-success" value="Save" formaction="/cart/save">
-                                <input type="submit"  class="btn btn-success" value="Order" formaction="/cart/order">
+                                <input type="hidden" name="orderId" value="<%= items[i]._id %>" formaction="/cart/order">
+                                <input type="submit" class="btn btn-success" value="Order" formaction="/cart/order">
                                 <input type="submit" class="btn btn-danger" value="Delete" formaction="/cart/delete">
                             </td>
                         </form>
@@ -35,8 +36,8 @@
             </tbody>
         </table>
         <form method="post">
-            <input type="submit" class="btn btn-success" value="Order All" formaction="/cart/address">
-            <input type="submit" class="btn btn-danger" value="Delete All" formaction="/cart/address">
+            <input type="submit" class="btn btn-success" value="Order All" formaction="/cart/orderAll">
+            <input type="submit" class="btn btn-danger" value="Delete All" formaction="/cart/deleteAll">
         </form>
     <% } %>
     <% if(validationErrors) { %>
