@@ -24,12 +24,11 @@
             <a class="nav-link" href="/signup">Signup</a>
           </li>
         <% } %>
-        <li class="nav-item">
-          <a class="nav-link" href="/admin/add">Add Pridct</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/orders">Manage Orders</a>
-        </li>
+        <% if(isAdmin) { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/add">Add Pridct</a>
+          </li>
+        <% } %>
       </ul>
       <% if(isUser){ %>
         <form action="/logout" method="post">

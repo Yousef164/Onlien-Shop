@@ -1,0 +1,21 @@
+<%- include('parts/header') %>
+<%- include('parts/navbar') %>
+<div class="container text-center">
+    <h3>Add Product</h3>
+    <form action="/admin/add" method="post" enctype="multipart/form-data">
+
+        <input type="text" class="form-control" name="name" placeholder="Name"><br>
+        <input type="number" class="form-control" name="price" placeholder="Price"><br>
+        <textarea type="password" class="form-control" name="description" placeholder="Description"></textarea><br>
+        <input type="file" class="form-control" name="image" placeholder="Image"><br>
+        <input type="submit" value="Add Product" class="btn btn-primary">
+    </form>
+    <% if(validationErrors) { %>
+        <% for (let err of validationErrors) { %>
+            <p class="alert alert-danger">
+                <%= err.msg %> 
+            </p>   
+        <% } %>
+    <% } %>
+</div>
+<%- include('parts/footer') %>

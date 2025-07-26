@@ -16,6 +16,7 @@ exports.getOrders = (req, res, next) => {
         title: "Orders Page",
         isUser: true,
         items: items, 
+        isAdmin: req.session.isAdmin,
         ordersError: req.flash('ordersError'),
         time: {
           days: days,

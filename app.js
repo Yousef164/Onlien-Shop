@@ -10,6 +10,7 @@ dotenv.config({path: './config.env'});
 const home          = require   ('./routes/home.route');
 const cartRouter    = require   ('./routes/cart.route');
 const authRouter    = require   ('./routes/auth.route');
+const adminRouter   = require  ('./routes/admin.route');
 const ordersRouter  = require ('./routes/orders.route');
 const productRouter = require('./routes/product.route');
 
@@ -42,6 +43,7 @@ app.use(flash());
 app.use('/', home);
 app.use('/', authRouter);
 app.use('/cart', cartRouter);
+app.use('/admin', adminRouter);
 app.use('/orders', ordersRouter);
 app.use('/product', productRouter);
 

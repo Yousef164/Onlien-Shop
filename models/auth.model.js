@@ -8,6 +8,10 @@ const userSchema = mongoose.Schema({
     username: String,
     email: String,
     password: String,
+    isAdmin: {
+        type: Boolean,
+        default:false
+    }
 });
 
 const User = mongoose.model('User', userSchema);
@@ -15,7 +19,8 @@ const User = mongoose.model('User', userSchema);
 exports.createNewUser = (username, email, password) => {
 
     return new Promise((resolve, reject) => {
-        mongoose.connect(DB_URI).then(()=> {
+        mongoose.connect(DB_URI)
+        .then(()=> {
             return User.findOne({ email: email });
         })
         .then(user => {
@@ -38,7 +43,7 @@ exports.createNewUser = (username, email, password) => {
         .then(()=> {
             mongoose.disconnect();
             resolve('User created successfully');
-        })
+         })
         .catch(err => {
             mongoose.disconnect();
             reject(err);
@@ -67,10 +72,17 @@ exports.login = (email, password) => {
                     }
                     else{
                         mongoose.disconnect();
-                        resolve(user._id);
+                        resolve({
+                            id: user._id,
+                            isAdmin: user.isAdmin
+                        });
                     }
                 })
             }
+        })
+        .catch(err => {
+            mongoose.disconnect();
+            reject(err)
         })
     });
 };

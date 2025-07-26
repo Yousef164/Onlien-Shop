@@ -7,7 +7,8 @@ exports.getProduct = (req, res, next)=> {
         res.render('product.page.ejs', {
             product: product,
             title: 'product page',
-            isUser: req.session.isAuth
+            isUser: req.session.isAuth,
+            isAdmin: req.session.isAdmin
         });
     });
 }

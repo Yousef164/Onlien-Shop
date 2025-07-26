@@ -9,7 +9,8 @@ exports.getCart = (req, res, next) => {
             title: 'Cart Page',
             items: items,
             isUser: true,
-            validationErrors: req.flash('validationErrors')
+            validationErrors: req.flash('validationErrors'),
+            isAdmin: req.session.isAdmin
         })
     })
     .catch(err => console.log(err));
@@ -88,20 +89,15 @@ exports.getAddress = (req, res, next) => {
     res.render('address', {
         title: "Address Page",
         isUser: true,
-        addressError: req.flash('addressError')[0]
+        addressError: req.flash('addressError')[0],
+        isAdmin: req.session.isAdmin
     });
 };
 
 exports.postAddress = (req, res, next) => {
     if(validationResult(req).isEmpty()) {
-        cartModel.getItemByUser(req.session.userId)
-        .then(items => {
-            cartModel.editAllItem(req.session.userId, "add", {address: req.body.userAddress})
-            .then(() => {})
-            .catch(err => console.log(err));
-            console.log(req.body);
-            res.redirect('/orders');
-        })
+        cartModel.editAllItem(req.session.userId, "add", {address: req.body.userAddress})
+        .then(() => {res.redirect('/orders');})
         .catch(err => console.log(err));
     }
     else{
